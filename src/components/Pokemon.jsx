@@ -1,17 +1,15 @@
 import React, {useState} from "react";
+import axios from 'axios';
 
 const Pokemon = () => {
 
     let [pokeList, setPokeList] = useState([])
 
     const getPokeApi = () => {
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
-            .then((response)=>{
-                return response.json()
-            })
-            .then((response)=>{
-                console.log(response.results)
-                setPokeList(response.results)
+        axios.get("https://pokeapi.co/api/v2/pokemon?limit=1000")
+              .then((response)=>{
+                console.log(response.data)
+                setPokeList(response.data.results)
             })
             .catch((err)=>{
                 console.log("error", err)
